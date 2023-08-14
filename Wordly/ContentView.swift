@@ -14,7 +14,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Text("Wordly - Learn a new word every day!")
+            Text("Wordly - Get a new word daily!")
             List(results) { item in
                 VStack(alignment: .leading) {
                     Text(item.word).font(.headline)
@@ -48,6 +48,12 @@ struct ContentView: View {
         }
     }
     
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
 }
 
 struct DictionaryWord: Identifiable, Codable {    // <--- here
