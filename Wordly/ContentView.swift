@@ -18,9 +18,16 @@ struct ContentView: View {
             List(results) { item in
                 VStack(alignment: .leading) {
                     Text(item.word).font(.headline)
-                    ForEach(item.phonetics) { phone in    // <--- here
-                        if phone.text != nil {
+                        .foregroundColor(.blue)
+                    ForEach(item.phonetics) { phone in
+                        if phone.text != nil && phone.sourceURL != nil {
                             Text(phone.text!)
+                            Text(phone.sourceURL!)
+                        }
+                    }
+                    ForEach(item.meanings) { means in
+                        if means.partOfSpeech != nil {
+                            Text(means.partOfSpeech!)
                         }
                     }
                 }
@@ -31,7 +38,7 @@ struct ContentView: View {
         }
     }
     
-    let freeDictionaryURL = "https://api.dictionaryapi.dev/api/v2/entries/en/hello"
+    let freeDictionaryURL = "https://api.dictionaryapi.dev/api/v2/entries/en/funny"
     
     func loadData() async {
         guard let url = URL(string: freeDictionaryURL) else {
@@ -40,11 +47,10 @@ struct ContentView: View {
         }
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
-            // --- here
             let decoded: [DictionaryWord] = try JSONDecoder().decode([DictionaryWord].self, from: data)
             results = decoded
         } catch {
-            print(error)  // <--- important
+            print(error)
         }
     }
     
@@ -59,32 +65,50 @@ struct ContentView_Previews: PreviewProvider {
 struct DictionaryWord: Identifiable, Codable {    // <--- here
     let id = UUID()
     
-    let word: String
-    let phonetics: [Phonetic]
-    let meanings: [Meaning]
-    let license: License
-    let sourceUrls: [String]
+    var word: String
+    var phonetics: [Phonetic]
+    var meanings: [Meaning]
+    var license: License
+    var sourceUrls: [String]
     
     enum CodingKeys: String, CodingKey {
         case word, phonetics, meanings, license, sourceUrls
     }
 }
 
-struct License: Codable {
+struct License: Identifiable, Codable {
+    let id = UUID()
     let name: String
     let url: String
+    
+    enum CodingKeys: String, CodingKey {
+        case name, url
+    }
 }
 
-struct Meaning: Codable {
+struct Meaning: Identifiable, Codable {
+    let id = UUID()
+    
     let partOfSpeech: String
     let definitions: [Definition]
     let synonyms, antonyms: [String]?
+    
+    enum CodingKeys: String, CodingKey {
+        case partOfSpeech, definitions, synonyms, antonyms
+    }
+
 }
 
-struct Definition: Codable {
+struct Definition: Identifiable, Codable {
+    let id = UUID()
+    
     let definition: String
     let synonyms, antonyms: [String]?
     let example: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case definition, example, synonyms, antonyms
+    }
 }
 
 struct Phonetic: Identifiable, Codable {    // <--- here
