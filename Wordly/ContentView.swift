@@ -14,51 +14,58 @@ struct ContentView: View {
     @State private var results = [DictionaryWord]()
     
     var body: some View {
-        VStack {
-            VStack{
-                // Application title and description
-                Text("Wordly")
-                    .fontDesign(.rounded)
-                    .font(.title)
-                Text("Get a new word everyday!")
-            }
-            .foregroundColor(.purple)
-            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-            
-            // List view to display dictionary results
-            List(results) { item in
-                VStack(alignment: .leading) {
-                    Text(item.word).font(.headline)
-                        .foregroundColor(.purple)
-                    
-                    // Display phonetics information
-                    ForEach(item.phonetics) { phone in
-                        if phone.text != nil && phone.sourceURL != nil {
-                            Text(phone.text!)
-//                            Text(phone.sourceURL!)
+        ZStack {
+            VStack {
+                VStack{
+                    // Application title and description
+                    Text("Wordly")
+                        .fontDesign(.rounded)
+                        .font(.title)
+                    Text("Get a new word everyday!")
+                }
+                .foregroundColor(.white)
+                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                
+                // List view to display dictionary results
+                List(results) { item in
+                    VStack(alignment: .leading) {
+                        Text(item.word).font(.headline)
+                            .foregroundColor(.purple)
+                        
+                        // Display phonetics information
+                        ForEach(item.phonetics) { phone in
+                            if phone.text != nil && phone.sourceURL != nil {
+                                Text(phone.text!)
+                                    .fontWeight(.bold)
+                                //                            Text(phone.sourceURL!)
+                            }
                         }
-                    }
-                    // Display meanings information
-                    ForEach(item.meanings) { means in
-                        ForEach(means.definitions) { def in
-                            Text(def.definition)
-                        }
-                        // Display part of speech if available
-                        if means.partOfSpeech != nil {
-                            Text(means.partOfSpeech)
+                        // Display meanings information
+                        ForEach(item.meanings) { means in
+                            ForEach(means.definitions) { def in
+                                Text(def.definition)
+                                Spacer()
+                            }
+                            // Display part of speech if available
+                            if means.partOfSpeech != nil {
+                                Text(means.partOfSpeech)
+                                    .fontWeight(.bold)
+                                Divider()
+                            }
                         }
                     }
                 }
             }
+            .task {
+                // Fetch data when the view is loaded
+                await loadData()
+            }
         }
-        .task {
-            // Fetch data when the view is loaded
-            await loadData()
-        }
+        .background(Color.purple)
     }
     
     // Default word of the day testing purposes
-    let wordOfDay = "funny"
+    let wordOfDay = "swift"
     // API URL for fetching dictionary data
     var freeDictionaryURL = "https://api.dictionaryapi.dev/api/v2/entries/en/"
     
@@ -120,7 +127,7 @@ struct Meaning: Identifiable, Codable {
     enum CodingKeys: String, CodingKey {
         case partOfSpeech, definitions, synonyms, antonyms
     }
-
+    
 }
 
 struct Definition: Identifiable, Codable {
@@ -142,7 +149,7 @@ struct Phonetic: Identifiable, Codable {    // <--- here
     let sourceURL: String?
     let license: License?
     let text: String?
-
+    
     enum CodingKeys: String, CodingKey {
         case audio
         case sourceURL = "sourceUrl"
