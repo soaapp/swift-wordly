@@ -7,11 +7,16 @@
 
 import SwiftUI
 import Foundation
+import LoremSwiftum
 
 struct ContentView: View {
     
     // State variable to hold the fetched dictionary results
     @State private var results = [DictionaryWord]()
+    // Default word of the day testing purposes
+    @State private var wordOfDay = "swift"
+    // API URL for fetching dictionary data
+    let freeDictionaryURL = "https://api.dictionaryapi.dev/api/v2/entries/en/"
     
     var body: some View {
         ZStack {
@@ -29,21 +34,22 @@ struct ContentView: View {
                 // List view to display dictionary results
                 List(results) { item in
                     VStack(alignment: .leading) {
-                        Text(item.word).font(.headline)
+                        Text(item.word)
+                            .font(.largeTitle)
                             .foregroundColor(Color("mainPurple"))
                         
                         // Display phonetics information
                         ForEach(item.phonetics) { phone in
                             if phone.text != nil && phone.sourceURL != nil {
                                 Text(phone.text!)
+                                    .font(.title3)
                                     .fontWeight(.bold)
-                                //                            Text(phone.sourceURL!)
                             }
                         }
                         // Display meanings information
                         ForEach(item.meanings) { means in
                             ForEach(means.definitions) { def in
-                                Text(def.definition)
+                                    Text("‣  " + def.definition)
                                 Spacer()
                             }
                             // Display part of speech if available
@@ -64,13 +70,20 @@ struct ContentView: View {
         .background(Color("mainPurple"))
     }
     
-    // Default word of the day testing purposes
-    let wordOfDay = "swift"
-    // API URL for fetching dictionary data
-    var freeDictionaryURL = "https://api.dictionaryapi.dev/api/v2/entries/en/"
+
+    
+    
     
     // Function to fetch data from the dictionary API
     func loadData() async {
+        
+        if check() {
+            // update wordOfDay from LoremSwiftum
+            wordOfDay = Lorem.word
+        } else {
+            // do nothing
+        }
+        
         let url = URL(string: "\(freeDictionaryURL)\(wordOfDay)")!
         do {
             // Fetch data from the API
@@ -83,6 +96,23 @@ struct ContentView: View {
             print(error)
         }
     }
+    
+    func check() -> Bool {
+            if let referenceDate = UserDefaults.standard.object(forKey: "reference") as? Date {
+                // reference date has been set, now check if date is not today
+                if !Calendar.current.isDateInToday(referenceDate) {
+                    // if date is not today, do things
+                    // update the reference date to today
+                    UserDefaults.standard.set(Date(), forKey: "reference")
+                    return true
+                }
+            } else {
+                // reference date has never been set, so set a reference date into UserDefaults
+                UserDefaults.standard.set(Date(), forKey: "reference")
+                return true
+            }
+            return false
+        }
     
 }
 
@@ -142,7 +172,7 @@ struct Definition: Identifiable, Codable {
     }
 }
 
-struct Phonetic: Identifiable, Codable {    // <--- here
+struct Phonetic: Identifiable, Codable {
     let id = UUID()
     
     let audio: String
