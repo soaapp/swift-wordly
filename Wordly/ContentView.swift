@@ -30,7 +30,7 @@ struct ContentView: View {
                 List(results) { item in
                     VStack(alignment: .leading) {
                         Text(item.word).font(.headline)
-                            .foregroundColor(.purple)
+                            .foregroundColor(Color("mainPurple"))
                         
                         // Display phonetics information
                         ForEach(item.phonetics) { phone in
@@ -61,7 +61,7 @@ struct ContentView: View {
                 await loadData()
             }
         }
-        .background(Color.purple)
+        .background(Color("mainPurple"))
     }
     
     // Default word of the day testing purposes
