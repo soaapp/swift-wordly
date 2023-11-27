@@ -24,12 +24,10 @@ struct ContentView: View {
                 VStack{
                     // Application title and description
                     Text("Wordly")
-                        .fontDesign(.rounded)
-                        .font(.title)
+                        .font(.custom("Flavors-Regular", size: 50))
                     Text("Get a new word everyday!")
                 }
                 .foregroundColor(.white)
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 
                 // List view to display dictionary results
                 List(results) { item in
@@ -78,10 +76,14 @@ struct ContentView: View {
     func loadData() async {
         
         if check() {
-            // update wordOfDay from LoremSwiftum
-            wordOfDay = Lorem.word
+            // update wordOfDay from LoremSwiftum package
+            //TODO: Find a way to test in sim daily update.
+            wordOfDay = Lorem.realWord
         } else {
-            // do nothing
+            //TODO: Remove wordOfDay setter here. USED FOR TESTING ONLY
+            wordOfDay = Lorem.realWord
+            print(wordOfDay)
+            
         }
         
         let url = URL(string: "\(freeDictionaryURL)\(wordOfDay)")!
