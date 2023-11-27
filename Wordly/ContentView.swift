@@ -125,7 +125,7 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 // Model structure for a dictionary word
-struct DictionaryWord: Identifiable, Codable {    // <--- here
+struct DictionaryWord: Identifiable, Codable {
     let id = UUID()
     
     var word: String

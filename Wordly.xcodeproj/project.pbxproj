@@ -14,6 +14,14 @@
 		EF771F942B13E2F100D8E7D8 /* LoremSwiftum in Frameworks */ = {isa = PBXBuildFile; productRef = EF771F932B13E2F100D8E7D8 /* LoremSwiftum */; };
 		EF771F962B13E33100D8E7D8 /* LoremSwiftum in Frameworks */ = {isa = PBXBuildFile; productRef = EF771F952B13E33100D8E7D8 /* LoremSwiftum */; };
 		EF771F992B14644300D8E7D8 /* LoremSwiftum in Frameworks */ = {isa = PBXBuildFile; productRef = EF771F982B14644300D8E7D8 /* LoremSwiftum */; };
+		EF771FA12B146CAD00D8E7D8 /* WordlyWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF771FA02B146CAD00D8E7D8 /* WordlyWatchApp.swift */; };
+		EF771FA32B146CAD00D8E7D8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF771FA22B146CAD00D8E7D8 /* ContentView.swift */; };
+		EF771FA52B146CAE00D8E7D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF771FA42B146CAE00D8E7D8 /* Assets.xcassets */; };
+		EF771FA82B146CAE00D8E7D8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF771FA72B146CAE00D8E7D8 /* Preview Assets.xcassets */; };
+		EF771FAB2B146CAE00D8E7D8 /* WordlyWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = EF771F9E2B146CAD00D8E7D8 /* WordlyWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		EF771FB12B146DF100D8E7D8 /* LoremSwiftum in Frameworks */ = {isa = PBXBuildFile; productRef = EF771FB02B146DF100D8E7D8 /* LoremSwiftum */; };
+		EF771FB22B14727300D8E7D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFA84BAB2A8402550068E586 /* Assets.xcassets */; };
+		EF771FB32B1472BC00D8E7D8 /* Flavors-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EF6153DA2B12F98F0087CF7E /* Flavors-Regular.ttf */; };
 		EFA84BA82A84024F0068E586 /* WordlyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA84BA72A84024F0068E586 /* WordlyApp.swift */; };
 		EFA84BAA2A84024F0068E586 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA84BA92A84024F0068E586 /* ContentView.swift */; };
 		EFA84BAC2A8402550068E586 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFA84BAB2A8402550068E586 /* Assets.xcassets */; };
@@ -24,6 +32,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		EF771FA92B146CAE00D8E7D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EFA84B9C2A84024E0068E586 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EF771F9D2B146CAD00D8E7D8;
+			remoteInfo = "WordlyWatch Watch App";
+		};
 		EFA84BB52A8402550068E586 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EFA84B9C2A84024E0068E586 /* Project object */;
@@ -40,8 +55,28 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		EF771FAC2B146CAE00D8E7D8 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				EF771FAB2B146CAE00D8E7D8 /* WordlyWatch Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		EF6153DA2B12F98F0087CF7E /* Flavors-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Flavors-Regular.ttf"; sourceTree = "<group>"; };
+		EF771F9E2B146CAD00D8E7D8 /* WordlyWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WordlyWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF771FA02B146CAD00D8E7D8 /* WordlyWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordlyWatchApp.swift; sourceTree = "<group>"; };
+		EF771FA22B146CAD00D8E7D8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		EF771FA42B146CAE00D8E7D8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EF771FA72B146CAE00D8E7D8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		EF771FB42B14731B00D8E7D8 /* WordlyWatch-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "WordlyWatch-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 		EFA84BA42A84024F0068E586 /* Wordly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wordly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFA84BA72A84024F0068E586 /* WordlyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordlyApp.swift; sourceTree = "<group>"; };
 		EFA84BA92A84024F0068E586 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -55,6 +90,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		EF771F9B2B146CAD00D8E7D8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF771FB12B146DF100D8E7D8 /* LoremSwiftum in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EFA84BA12A84024F0068E586 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -91,12 +134,33 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		EF771F9F2B146CAD00D8E7D8 /* WordlyWatch Watch App */ = {
+			isa = PBXGroup;
+			children = (
+				EF771FB42B14731B00D8E7D8 /* WordlyWatch-Watch-App-Info.plist */,
+				EF771FA02B146CAD00D8E7D8 /* WordlyWatchApp.swift */,
+				EF771FA22B146CAD00D8E7D8 /* ContentView.swift */,
+				EF771FA42B146CAE00D8E7D8 /* Assets.xcassets */,
+				EF771FA62B146CAE00D8E7D8 /* Preview Content */,
+			);
+			path = "WordlyWatch Watch App";
+			sourceTree = "<group>";
+		};
+		EF771FA62B146CAE00D8E7D8 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				EF771FA72B146CAE00D8E7D8 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		EFA84B9B2A84024E0068E586 = {
 			isa = PBXGroup;
 			children = (
 				EFA84BA62A84024F0068E586 /* Wordly */,
 				EFA84BB72A8402550068E586 /* WordlyTests */,
 				EFA84BC12A8402550068E586 /* WordlyUITests */,
+				EF771F9F2B146CAD00D8E7D8 /* WordlyWatch Watch App */,
 				EFA84BA52A84024F0068E586 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -107,6 +171,7 @@
 				EFA84BA42A84024F0068E586 /* Wordly.app */,
 				EFA84BB42A8402550068E586 /* WordlyTests.xctest */,
 				EFA84BBE2A8402550068E586 /* WordlyUITests.xctest */,
+				EF771F9E2B146CAD00D8E7D8 /* WordlyWatch Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -151,6 +216,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		EF771F9D2B146CAD00D8E7D8 /* WordlyWatch Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF771FAF2B146CAE00D8E7D8 /* Build configuration list for PBXNativeTarget "WordlyWatch Watch App" */;
+			buildPhases = (
+				EF771F9A2B146CAD00D8E7D8 /* Sources */,
+				EF771F9B2B146CAD00D8E7D8 /* Frameworks */,
+				EF771F9C2B146CAD00D8E7D8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "WordlyWatch Watch App";
+			packageProductDependencies = (
+				EF771FB02B146DF100D8E7D8 /* LoremSwiftum */,
+			);
+			productName = "WordlyWatch Watch App";
+			productReference = EF771F9E2B146CAD00D8E7D8 /* WordlyWatch Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
 		EFA84BA32A84024F0068E586 /* Wordly */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EFA84BC82A8402550068E586 /* Build configuration list for PBXNativeTarget "Wordly" */;
@@ -158,10 +243,12 @@
 				EFA84BA02A84024F0068E586 /* Sources */,
 				EFA84BA12A84024F0068E586 /* Frameworks */,
 				EFA84BA22A84024F0068E586 /* Resources */,
+				EF771FAC2B146CAE00D8E7D8 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				EF771FAA2B146CAE00D8E7D8 /* PBXTargetDependency */,
 			);
 			name = Wordly;
 			packageProductDependencies = (
@@ -217,9 +304,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1430;
+				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					EF771F9D2B146CAD00D8E7D8 = {
+						CreatedOnToolsVersion = 15.0.1;
+					};
 					EFA84BA32A84024F0068E586 = {
 						CreatedOnToolsVersion = 14.3.1;
 					};
@@ -252,11 +342,23 @@
 				EFA84BA32A84024F0068E586 /* Wordly */,
 				EFA84BB32A8402550068E586 /* WordlyTests */,
 				EFA84BBD2A8402550068E586 /* WordlyUITests */,
+				EF771F9D2B146CAD00D8E7D8 /* WordlyWatch Watch App */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		EF771F9C2B146CAD00D8E7D8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF771FB32B1472BC00D8E7D8 /* Flavors-Regular.ttf in Resources */,
+				EF771FB22B14727300D8E7D8 /* Assets.xcassets in Resources */,
+				EF771FA82B146CAE00D8E7D8 /* Preview Assets.xcassets in Resources */,
+				EF771FA52B146CAE00D8E7D8 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EFA84BA22A84024F0068E586 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -286,6 +388,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		EF771F9A2B146CAD00D8E7D8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF771FA32B146CAD00D8E7D8 /* ContentView.swift in Sources */,
+				EF771FA12B146CAD00D8E7D8 /* WordlyWatchApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EFA84BA02A84024F0068E586 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -315,6 +426,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		EF771FAA2B146CAE00D8E7D8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EF771F9D2B146CAD00D8E7D8 /* WordlyWatch Watch App */;
+			targetProxy = EF771FA92B146CAE00D8E7D8 /* PBXContainerItemProxy */;
+		};
 		EFA84BB62A8402550068E586 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = EFA84BA32A84024F0068E586 /* Wordly */;
@@ -328,6 +444,77 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		EF771FAD2B146CAE00D8E7D8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"WordlyWatch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = J5PULWA79J;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "WordlyWatch-Watch-App-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = WordlyWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = JJ.Wordly;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = JJ.Wordly.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		EF771FAE2B146CAE00D8E7D8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"WordlyWatch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = J5PULWA79J;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "WordlyWatch-Watch-App-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = WordlyWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = JJ.Wordly;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = JJ.Wordly.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
 		EFA84BC62A8402550068E586 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -385,6 +572,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Debug;
 		};
@@ -439,12 +627,14 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Release;
 		};
 		EFA84BC92A8402550068E586 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -478,6 +668,7 @@
 		EFA84BCA2A8402550068E586 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -587,6 +778,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		EF771FAF2B146CAE00D8E7D8 /* Build configuration list for PBXNativeTarget "WordlyWatch Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF771FAD2B146CAE00D8E7D8 /* Debug */,
+				EF771FAE2B146CAE00D8E7D8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		EFA84B9F2A84024E0068E586 /* Build configuration list for PBXProject "Wordly" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -646,6 +846,10 @@
 			productName = LoremSwiftum;
 		};
 		EF771F982B14644300D8E7D8 /* LoremSwiftum */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LoremSwiftum;
+		};
+		EF771FB02B146DF100D8E7D8 /* LoremSwiftum */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = LoremSwiftum;
 		};
