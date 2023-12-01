@@ -8,6 +8,6 @@ Wordly was inspired by my father who would always advise me to try and become 1%
 
 Wordly is also now on the Apple Watch with added watchOS support:
 
-<img width="379" alt="Screenshot 2023-11-27 at 1 54 09 AM" src="https://github.com/soaapp/swift-wordly/assets/32276969/83d67a35-997b-45fd-989b-9d7130ab37c9">
+<img width="379" alt="Screenshot 2023-11-27 at 1 54 09 AM" src="https://github.com/soaapp/swift-wordly/assets/32276969/71268e63-f22b-4566-9c31-6ac2bc0731e0">
 
 
