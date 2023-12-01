@@ -15,6 +15,9 @@ struct ContentView: View {
     @State private var results = [DictionaryWord]()
     // Default word of the day testing purposes
     @State private var wordOfDay = "swift"
+    // Flag to check if it needs to be refreshed.
+    @State private var needsRefresh = false
+    
     // API URL for fetching dictionary data
     let freeDictionaryURL = "https://api.dictionaryapi.dev/api/v2/entries/en/"
     
@@ -29,12 +32,23 @@ struct ContentView: View {
                 }
                 .foregroundColor(.white)
                 
+                
                 // List view to display dictionary results
                 List(results) { item in
                     VStack(alignment: .leading) {
-                        Text(item.word)
-                            .font(.largeTitle)
-                            .foregroundColor(Color("mainPurple"))
+                        
+                        HStack {
+                            Text(item.word)
+                                .font(.largeTitle)
+                                .foregroundColor(Color("mainPurple"))
+                            Button {
+                                refresh()
+                                print("Refresh button clicked")
+                            } label: {
+                                Image(systemName: "arrow.clockwise")
+                                    .foregroundColor(Color("mainPurple"))
+                            }
+                        }
                         
                         // Display phonetics information
                         ForEach(item.phonetics) { phone in
@@ -47,7 +61,7 @@ struct ContentView: View {
                         // Display meanings information
                         ForEach(item.meanings) { means in
                             ForEach(means.definitions) { def in
-                                    Text("‣  " + def.definition)
+                                Text("‣  " + def.definition)
                                 Spacer()
                             }
                             // Display part of speech if available
@@ -61,60 +75,99 @@ struct ContentView: View {
                 }
             }
             .task {
-                // Fetch data when the view is loaded
-                await loadData()
+                refresh()
             }
         }
         .background(Color("mainPurple"))
     }
     
-
     
-    
+    // Function to refresh data
+    func refresh() {
+        print("Refreshing data...")
+        
+        Task {
+            await loadData()
+            print("Word refreshed")
+        }
+    }
     
     // Function to fetch data from the dictionary API
     func loadData() async {
         
+        //TODO: Is this in the wrong spot?
         if check() {
             // update wordOfDay from LoremSwiftum package
-            //TODO: Find a way to test in sim daily update.
+            // TODO: Find a way to test in sim daily update.
             wordOfDay = Lorem.realWord
         } else {
-            //TODO: Remove wordOfDay setter here. USED FOR TESTING ONLY
+            // TODO: Remove wordOfDay setter here. USED FOR TESTING ONLY
             wordOfDay = Lorem.realWord
             print(wordOfDay)
-            
         }
+        
+        print("Word refreshed")
+        print(wordOfDay)
         
         let url = URL(string: "\(freeDictionaryURL)\(wordOfDay)")!
         do {
             // Fetch data from the API
-            let (data, _) = try await URLSession.shared.data(from: url)
-            // Decode the JSON data into an array of DictionaryWord objects
-            let decoded: [DictionaryWord] = try JSONDecoder().decode([DictionaryWord].self, from: data)
-            // Update the results state variable
-            results = decoded
+            let (data, response) = try await URLSession.shared.data(from: url)
+            
+            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+                // Try to decode the JSON data into an array of DictionaryWord objects
+                do {
+                    let decoded: [DictionaryWord] = try JSONDecoder().decode([DictionaryWord].self, from: data)
+                    
+                    if !decoded.isEmpty {
+                        // Update the results state variable
+                        results = decoded
+                    } else {
+                        // Handle when DictionaryAPI doesn't have any details about word
+                        print("Invalid data received from API. Trying another word.")
+                        await loadData()
+                    }
+                } catch let decodingError {
+                    // Handle decoding error
+                    print("Decoding error: \(decodingError)")
+                    
+                    // Try to decode the JSON data into an error response
+                    if let errorResponse = try? JSONDecoder().decode(ErrorResponse.self, from: data) {
+                        // Check if the error response indicates "No Definitions Found"
+                        if errorResponse.title == "No Definitions Found" {
+                            print("No definitions found for the word. Using another word.")
+                            await loadData()
+                        }
+                    }
+                }
+            } else {
+                print("Error in API response. Refreshing word.")
+                await loadData()
+            }
+            
         } catch {
-            print(error)
+            print("Error: \(error)")
+            await loadData()
         }
     }
     
+    
     func check() -> Bool {
-            if let referenceDate = UserDefaults.standard.object(forKey: "reference") as? Date {
-                // reference date has been set, now check if date is not today
-                if !Calendar.current.isDateInToday(referenceDate) {
-                    // if date is not today, do things
-                    // update the reference date to today
-                    UserDefaults.standard.set(Date(), forKey: "reference")
-                    return true
-                }
-            } else {
-                // reference date has never been set, so set a reference date into UserDefaults
+        if let referenceDate = UserDefaults.standard.object(forKey: "reference") as? Date {
+            // reference date has been set, now check if date is not today
+            if !Calendar.current.isDateInToday(referenceDate) {
+                // if date is not today, do things
+                // update the reference date to today
                 UserDefaults.standard.set(Date(), forKey: "reference")
                 return true
             }
-            return false
+        } else {
+            // reference date has never been set, so set a reference date into UserDefaults
+            UserDefaults.standard.set(Date(), forKey: "reference")
+            return true
         }
+        return false
+    }
     
 }
 
@@ -187,4 +240,10 @@ struct Phonetic: Identifiable, Codable {
         case sourceURL = "sourceUrl"
         case license, text
     }
+}
+
+struct ErrorResponse: Decodable {
+    let title: String
+    let message: String
+    let resolution: String
 }
