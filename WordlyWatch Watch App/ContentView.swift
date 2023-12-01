@@ -25,9 +25,18 @@ struct ContentView: View {
             
             List(results) { item in
                 VStack(alignment: .leading) {
-                    Text(item.word)
-                        .font(.title)
-                        .foregroundColor(Color("mainPurple"))
+                    HStack {
+                        Text(item.word)
+                            .font(.largeTitle)
+                            .foregroundColor(Color("mainPurple"))
+                        Button {
+                            refresh()
+                            print("Refresh button clicked")
+                        } label: {
+                            Image(systemName: "arrow.clockwise")
+                                .foregroundColor(Color("mainPurple"))
+                        }
+                    }
                     
                     ForEach(item.phonetics) { phone in
                         if phone.text != nil && phone.sourceURL != nil {
@@ -50,34 +59,77 @@ struct ContentView: View {
                     }
                 }
             }
-            .onAppear {
+            .task {
                 // Fetch data when the view is loaded
-                loadData()
+                refresh()
             }
         }
     }
     
-    func loadData() {
+    func refresh() {
+        print("Refreshing data...")
+        
+        Task {
+            await loadData()
+            print("Word refreshed")
+        }
+    }
+    
+    // Function to fetch data from the dictionary API
+    func loadData() async {
+        
         if check() {
+            // update wordOfDay from custom extension of the LoremSwiftum package. Package is local.
+            // TODO: Find a way to test in sim daily update.
             wordOfDay = Lorem.realWord
         } else {
-            wordOfDay = "hello"
+            // TODO: Remove wordOfDay setter here. USED FOR TESTING ONLY
+            wordOfDay = Lorem.realWord
             print(wordOfDay)
         }
         
-        if let url = URL(string: "\(freeDictionaryURL)\(wordOfDay)") {
-            URLSession.shared.dataTask(with: url) { data, _, error in
-                if let data = data {
-                    do {
-                        let decoded = try JSONDecoder().decode([DictionaryWord].self, from: data)
-                        DispatchQueue.main.async {
-                            self.results = decoded
+        print("Word refreshed")
+        print(wordOfDay)
+        
+        let url = URL(string: "\(freeDictionaryURL)\(wordOfDay)")!
+        do {
+            // Fetch data from the API
+            let (data, response) = try await URLSession.shared.data(from: url)
+            
+            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+                // Try to decode the JSON data into an array of DictionaryWord objects
+                do {
+                    let decoded: [DictionaryWord] = try JSONDecoder().decode([DictionaryWord].self, from: data)
+                    
+                    if !decoded.isEmpty {
+                        // Update the results state variable
+                        results = decoded
+                    } else {
+                        // Handle when DictionaryAPI doesn't have any details about word
+                        print("Invalid data received from API. Trying another word.")
+                        await loadData()
+                    }
+                } catch let decodingError {
+                    // Handle decoding error
+                    print("Decoding error: \(decodingError)")
+                    
+                    // Try to decode the JSON data into an error response
+                    if let errorResponse = try? JSONDecoder().decode(ErrorResponse.self, from: data) {
+                        // Check if the error response indicates "No Definitions Found"
+                        if errorResponse.title == "No Definitions Found" {
+                            print("No definitions found for the word. Using another word.")
+                            await loadData()
                         }
-                    } catch {
-                        print(error)
                     }
                 }
-            }.resume()
+            } else {
+                print("Error in API response. Refreshing word.")
+                await loadData()
+            }
+            
+        } catch {
+            print("Error: \(error)")
+            await loadData()
         }
     }
     
@@ -163,4 +215,10 @@ struct Phonetic: Identifiable, Codable {
         case sourceURL = "sourceUrl"
         case license, text
     }
+}
+
+struct ErrorResponse: Decodable {
+    let title: String
+    let message: String
+    let resolution: String
 }

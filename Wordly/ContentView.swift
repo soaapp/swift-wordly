@@ -98,10 +98,10 @@ struct ContentView: View {
         if check() {
             // update wordOfDay from custom extension of the LoremSwiftum package. Package is local.
             // TODO: Find a way to test in sim daily update.
-            wordOfDay = Lorem.realWord
+//            wordOfDay = Lorem.realWord
         } else {
             // TODO: Remove wordOfDay setter here. USED FOR TESTING ONLY
-            wordOfDay = Lorem.realWord
+//            wordOfDay = Lorem.realWord
             print(wordOfDay)
         }
         
