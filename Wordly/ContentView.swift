@@ -95,9 +95,8 @@ struct ContentView: View {
     // Function to fetch data from the dictionary API
     func loadData() async {
         
-        //TODO: Is this in the wrong spot?
         if check() {
-            // update wordOfDay from LoremSwiftum package
+            // update wordOfDay from custom extension of the LoremSwiftum package. Package is local.
             // TODO: Find a way to test in sim daily update.
             wordOfDay = Lorem.realWord
         } else {
